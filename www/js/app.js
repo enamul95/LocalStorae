@@ -32,7 +32,7 @@ angular.module('starter', ['ionic','ngCordova'])
 .controller('SignInCtrl', function($scope, $state, $http,$cordovaSQLite) {
 
 	$scope.DoSubmitAction=function(sq){
-	alert("Dooooo");
+	alert("sadfffffffffff");
 	var query = "INSERT INTO people (id,firstname, lastname) VALUES (?,?,?)";
     $cordovaSQLite.execute(db, query, [1,"khaled", "omar"]).then(function(res) {
         $scope.name=res.insertId;
@@ -40,6 +40,11 @@ angular.module('starter', ['ionic','ngCordova'])
         $scope.name="error";
     });
 		
+	
+	}
+	
+	$scope.select=function(sq){
+	alert("ssssss"+$scope.name);
 	}
 	
 	
