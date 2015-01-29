@@ -32,19 +32,16 @@ angular.module('starter', ['ionic','ngCordova'])
 .controller('SignInCtrl', function($scope, $state, $http,$cordovaSQLite) {
 
 	$scope.DoSubmitAction=function(sq){
-	alert("First");
-		 var query = "INSERT INTO test (name, address) VALUES (?,?)";
-        $cordovaSQLite.execute(db, query, [sq.name, sq.address]).then(function(res) {
-		
-           // var message = "INSERT ID -> " + res.insertId;
-            //console.log(message);
-           alert("Saved !");
-        }, function (err) {
-            console.error(err);
-            alert(err);
-        });	
+	var query = "INSERT INTO people (id,firstname, lastname) VALUES (?,?,?)";
+    $cordovaSQLite.execute(db, query, [1,"khaled", "omar"]).then(function(res) {
+        $scope.name=res.insertId;
+    }, function (err) {
+        $scope.name="error";
+    });
 		
 	}
+	
+	
 			
 	
 })
@@ -65,11 +62,20 @@ angular.module('starter', ['ionic','ngCordova'])
       StatusBar.styleDefault();
     }
 	
-	  db = $cordovaSQLite.openDB({ name: "my.db" });
-        $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS test (id integer primary key, name text, address text)");
-	 
-
- });
+	 //db = $cordovaSQLite.openDB({ name: "my.db" });
+       // $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS test (id integer primary key, name text, address text)");
+	
+		//if(window.cordova) {
+	//	db = $cordovaSQLite.openDB({name: "my.db"});
+	//} else {
+		//db = window.openDatabase("sales_distribution", "1.0", "sales_distribution", 2000000);
+	//}
+	db = $cordovaSQLite.openDB("test.db");
+    $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS people (id integer primary key, firstname text, lastname text)");
+    console.log("hello");
+	
+	
+	 });
    //alert(db);
 
 })
